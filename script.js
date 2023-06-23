@@ -103,19 +103,36 @@ function onBtnClick(event){
 
     else if(btnId == 'div'){
         opr = 'div';
+        clearNext = true;
+
+        if (num1 == null || lastKey == "eql"){
+            num1 = Number(dispTxt);
+        } 
+
         activeKey("div", lastKey);
         lastKey = "div";
     }
     else if(btnId == 'mul'){
         opr = 'mul';
+        clearNext = true;
+
+        if (num1 == null || lastKey == "eql"){
+            num1 = Number(dispTxt);
+        } 
+
         activeKey("mul", lastKey);
         lastKey = "mul";
     }
     else if(btnId == 'min'){
         opr = 'min';
+        clearNext = true;
+
+        if (num1 == null || lastKey == "eql"){
+            num1 = Number(dispTxt);
+        } 
+
         activeKey("min", lastKey);
         lastKey = "min";
-        
     }
     else if(btnId == 'pls'){
         opr = 'pls';
@@ -137,9 +154,12 @@ function onBtnClick(event){
         }
 
         let temp = Number(dispTxt)
-        dispTxt = operate(num1, temp, opr);
+        
         if (lastKey != "eql"){
+            dispTxt = operate(num1, temp, opr);
             num1 = temp;
+        } else{
+            dispTxt = operate(temp, num1, opr);
         }
 
         activeKey(null, lastKey);
