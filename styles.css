@@ -1,8 +1,22 @@
 
 
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+
+:root{
+    --main: #fff37a;
+    --back: #242529;
+    --lightback: #37393f;
+    --light: #dcdcdc;
+    --white: #faede3;
+}
+
+
 body {
-    background-color: #1e1e1e;
-    color: #FFFFFF;
+    margin: 0px;
+    background-color: var(--back);
+    color: var(--white);
 
     height: 100vh;
 
@@ -11,20 +25,35 @@ body {
     justify-content: center;
     align-items: center;
 
+    font-size: 50px;
+    font-family: 'Space Mono', monospace;
+    
 }
 
 .screen{
-    width: 400px;
+    width: 350px;
     height: 100px;
-    background-color: #FFFFFF;
+    background-color: var(--white);
     margin: 5px;
+    border-radius: 50px;
+    padding: 10px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    box-sizing: border-box;
 }
 
 .calcContainer{
-    width: 50%;
+    width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--back);
+
+    padding: 20px 40px;
+
+    border-radius: 50px;
 }
 
 .row{
@@ -41,10 +70,33 @@ body {
     height: 80px;
     padding: 10px;
     margin: 5px;
+    border-radius: 50px;
+    font-size: 25px;
+    font-family: 'Space Mono', monospace;
+    background-color: var(--lightback);
+    color: var(--white);
+    border-width: 0px;
+    
+}
+
+.btn:hover{
+    background-color: var(--main);
+    color: var(--back);
 }
 
 #ac, #eql{
     width: 170px;
+    background-color: var(--main);
+    color: var(--back);
+    
+}
+
+#ac:hover, #eql:hover{
+    background-color: var(--back);
+    color: var(--main);
+    border-width: 2px;
+    border-color: #fff37a;
+    border-style: solid;
 }
 
 
