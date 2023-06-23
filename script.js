@@ -6,12 +6,10 @@ let btns = document.querySelectorAll('.btn');
 let screenText = document.querySelector('#screenDisp')
 
 let num1 = null;
-let num2 = null;
 let opr = null;
 
 let dispTxt = "0"
 let clearNext = false;
-
 let lastKey = null;
 
 
@@ -84,7 +82,7 @@ function onBtnClick(event){
         dispTxt = "0"
         opr = null;
         num1 = null;
-        num2 = null;
+ 
 
         activeKey(null, lastKey);
         lastKey = "ac";
@@ -150,7 +148,6 @@ function onBtnClick(event){
     }
     else if(btnId == 'eql'){
 
-        // console.log(`num1: ${num1}, num2: ${num2}`)
 
         if (num1 == null){
             num1 = Number(dispTxt);
@@ -174,17 +171,20 @@ function onBtnClick(event){
     // If a number is pressed
     else {
 
-        if (clearNext){
-            dispTxt = "0";
-            clearNext = false;
+        if (dispTxt.length < 13){
+            if (clearNext){
+                dispTxt = "0";
+                clearNext = false;
+            }
+    
+            if (dispTxt === "0"){
+                dispTxt = String(btnId);
+            }
+            else {
+                dispTxt += String(btnId);
+            }
         }
-
-        if (dispTxt === "0"){
-            dispTxt = String(btnId);
-        }
-        else {
-            dispTxt += String(btnId);
-        }
+        
         activeKey(null, lastKey);
         lastKey = "num";
     }
