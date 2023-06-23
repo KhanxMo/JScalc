@@ -20,20 +20,20 @@ let lastKey = null;
  * @param {Number} num1 The first number in the operation. 
  * @param {Number} num2 The second number in the operation. 
  * @param {String} opr The type of operation (div, mul, min, pls).
- * @returns {Number} The result of the operation. 
+ * @returns {String} The result of the operation. 
  */
 function operate(num1, num2, opr){
     if (opr == "div"){
-        return num1 / num2;
+        return String(num1 / num2);
     }
     else if (opr == "mul"){
-        return num1 * num2;
+        return String(num1 * num2);
     }
     else if (opr == "min"){
-        return num1 - num2;
+        return String(num1 - num2);
     }
     else {
-        return num1 + num2;
+        return String(num1 + num2);
     }
 }
 
@@ -82,6 +82,7 @@ function onBtnClick(event){
     // Cases based on whats is clicked
     if (btnId == 'ac'){
         dispTxt = "0"
+        opr = null;
         num1 = null;
         num2 = null;
 
@@ -90,6 +91,8 @@ function onBtnClick(event){
     }
     else if(btnId == 'del'){
         dispTxt = del(dispTxt);
+
+        num1 = null;
 
         activeKey(null, lastKey);
         lastKey = "del";
@@ -152,15 +155,17 @@ function onBtnClick(event){
         if (num1 == null){
             num1 = Number(dispTxt);
         }
-
-        let temp = Number(dispTxt)
+        if (opr){
+            let temp = Number(dispTxt)
         
-        if (lastKey != "eql"){
-            dispTxt = operate(num1, temp, opr);
-            num1 = temp;
-        } else{
-            dispTxt = operate(temp, num1, opr);
+            if (lastKey != "eql"){
+                dispTxt = operate(num1, temp, opr);
+                num1 = temp;
+            } else{
+                dispTxt = operate(temp, num1, opr);
+            }
         }
+
 
         activeKey(null, lastKey);
         lastKey = "eql";
@@ -175,10 +180,10 @@ function onBtnClick(event){
         }
 
         if (dispTxt === "0"){
-            dispTxt = btnId;
+            dispTxt = String(btnId);
         }
         else {
-            dispTxt += btnId;
+            dispTxt += String(btnId);
         }
         activeKey(null, lastKey);
         lastKey = "num";
