@@ -57,6 +57,27 @@ function dot(text){
 }
 
 
+function activeKey(name, last){
+
+    console.log(name);
+    console.log(last);
+
+    if (name){
+        let key = document.querySelector("#"+name);
+        key.classList += " activeKey";
+    }
+    
+    if (last){
+        key = document.querySelector("#"+last);
+
+        if (key && key.classList.contains("activeKey")){
+            key.classList.remove("activeKey");
+        } 
+    }
+
+}
+
+
 
 
 
@@ -72,28 +93,36 @@ function onBtnClick(event){
         dispTxt = "0"
         num1 = 0;
         num2 = 0;
+        activeKey(null, lastKey);
         lastKey = "ac";
+        
     }
     else if(btnId == 'del'){
         dispTxt = del(dispTxt);
+        activeKey(null, lastKey);
         lastKey = "del";
     }
     else if(btnId == 'dot'){
         dispTxt = dot(dispTxt);
+        activeKey(null, lastKey);
         lastKey = "dot";
     }
 
     else if(btnId == 'div'){
         opr = 'div';
+        activeKey("div", lastKey);
         lastKey = "div";
     }
     else if(btnId == 'mul'){
         opr = 'mul';
+        activeKey("mul", lastKey);
         lastKey = "mul";
     }
     else if(btnId == 'min'){
         opr = 'min';
+        activeKey("min", lastKey);
         lastKey = "min";
+        
     }
     else if(btnId == 'pls'){
         if (lastKey == "num"){
@@ -108,7 +137,10 @@ function onBtnClick(event){
                 clearNext = true;
             }
         }
+
+        activeKey("pls", lastKey);
         lastKey = "pls";
+        
     }
     else if(btnId == 'eql'){
         
@@ -119,7 +151,7 @@ function onBtnClick(event){
                 clearNext = true;
             }
         }
-
+        activeKey(null, lastKey);
         lastKey = "eql";
     }
     
@@ -136,7 +168,7 @@ function onBtnClick(event){
         else {
             dispTxt += btnId;
         }
-
+        activeKey(null, lastKey);
         lastKey = "num";
     }
 

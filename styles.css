@@ -84,6 +84,13 @@ body {
     color: var(--back);
 }
 
+.activeKey{
+    background-color: var(--back);
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--main);
+}
+
 #ac, #eql{
     width: 170px;
     background-color: var(--main);
