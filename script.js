@@ -1,7 +1,6 @@
 // Script for Calculator 
 
 
-
 // Defining Variables
 let btns = document.querySelectorAll('.btn');
 let screenText = document.querySelector('#screenDisp')
@@ -15,15 +14,15 @@ let clearNext = false;
 
 let lastKey = null;
 
-/**
- * 
+
+
+/** 
  * @param {Number} num1 The first number in the operation. 
  * @param {Number} num2 The second number in the operation. 
  * @param {String} opr The type of operation (div, mul, min, pls).
  * @returns {Number} The result of the operation. 
  */
 function operate(num1, num2, opr){
-
     if (opr == "div"){
         return num1 / num2;
     }
@@ -37,8 +36,6 @@ function operate(num1, num2, opr){
         return num1 + num2;
     }
 }
-
-
 
 function del(text){
 
@@ -56,12 +53,8 @@ function dot(text){
     return text
 }
 
-
+// Sets "name" key to active state, and sets the last one to inactive.
 function activeKey(name, last){
-
-    console.log(name);
-    console.log(last);
-
     if (name){
         let key = document.querySelector("#"+name);
         key.classList += " activeKey";
@@ -79,8 +72,6 @@ function activeKey(name, last){
 
 
 
-
-
 // Called when a button is clicked, and handles what to do with the click. 
 function onBtnClick(event){
 
@@ -91,19 +82,21 @@ function onBtnClick(event){
     // Cases based on whats is clicked
     if (btnId == 'ac'){
         dispTxt = "0"
-        num1 = 0;
-        num2 = 0;
+        num1 = null;
+        num2 = null;
+
         activeKey(null, lastKey);
         lastKey = "ac";
-        
     }
     else if(btnId == 'del'){
         dispTxt = del(dispTxt);
+
         activeKey(null, lastKey);
         lastKey = "del";
     }
     else if(btnId == 'dot'){
         dispTxt = dot(dispTxt);
+
         activeKey(null, lastKey);
         lastKey = "dot";
     }
@@ -125,32 +118,30 @@ function onBtnClick(event){
         
     }
     else if(btnId == 'pls'){
-        if (lastKey == "num"){
-            opr = 'pls';
-            if (num1 == null){
-                num1 = Number(dispTxt);
-                dispTxt = "0";
-            }
-            else{
-                num1 = operate(num1, Number(dispTxt), opr);
-                dispTxt = num1;
-                clearNext = true;
-            }
-        }
+        opr = 'pls';
+        clearNext = true;
+
+        if (num1 == null || lastKey == "eql"){
+            num1 = Number(dispTxt);
+        } 
 
         activeKey("pls", lastKey);
         lastKey = "pls";
-        
     }
     else if(btnId == 'eql'){
-        
-        if (lastKey == "num"){
-            if (num1){
-                num1 = operate(num1, Number(dispTxt), opr);
-                dispTxt = num1;
-                clearNext = true;
-            }
+
+        // console.log(`num1: ${num1}, num2: ${num2}`)
+
+        if (num1 == null){
+            num1 = Number(dispTxt);
         }
+
+        let temp = Number(dispTxt)
+        dispTxt = operate(num1, temp, opr);
+        if (lastKey != "eql"){
+            num1 = temp;
+        }
+
         activeKey(null, lastKey);
         lastKey = "eql";
     }
@@ -160,6 +151,7 @@ function onBtnClick(event){
 
         if (clearNext){
             dispTxt = "0";
+            clearNext = false;
         }
 
         if (dispTxt === "0"){
